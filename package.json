@@ -1,0 +1,15 @@
+{
+  "name": "p2p-udp-chat",
+  "version": "1.0.0",
+  "description": "A simple peer-to-peer UDP chat",
+  "type": "module",
+  "scripts": {
+    "start": "node src/client.js",
+    "server": "node src/server.js"
+  },
+  "author": "knownasbot",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.0.0"
+  }
+}
