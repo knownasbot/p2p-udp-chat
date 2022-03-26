@@ -9,11 +9,11 @@ let rooms = new Map();
 let interval = 5*60*1000;
 setInterval(() => {
     rooms.forEach((room, k) => {
-        if (room.lastActivity < (Date.now() + interval)) {
+        if (room.lastActivity + interval < Date.now()) {
             rooms.delete(k);
         } else {
             room.peers.forEach((peer, i) => {
-                if (peer.lastActivity < (Date.now() + interval)) {
+                if (peer.lastActivity + interval < Date.now()) {
                     room.splice(i);
                 }
             });
@@ -60,7 +60,7 @@ socket.on("message", (msg, rinfo) => {
             }
 
             // id, peer list
-            socket.send(Buffer.from("\x01" + JSON.stringify(peerList)), port, ip, (err) => {
+            socket.send("\x01" + JSON.stringify(peerList), port, ip, (err) => {
                 if (err)
                     return console.error(`Failed to send the peer list of room "${roomId}" to the peer ${ipPort}:\n`, err);
             });
