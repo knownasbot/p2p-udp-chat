@@ -49,7 +49,7 @@ socket.on("message", (msg, rinfo) => {
                 socket.send("\x00", port, ip);
             }
 
-            console.log("\r[Room]", "Peers in the room: ", data.length + 1);
+            console.log("[Room]", "Peers in the room: ", data.length + 1);
         }
     } else {
         let ipPort = rinfo.address + ":" + rinfo.port;
@@ -106,9 +106,7 @@ function sendMessage(content) {
  * @param {number} port Peer port.
  */
 function sendPeerMessage(content, ip, port) {
-    let message = Buffer.from("\x02" + content);
-
-    return socket.send(message, port, ip, (err) => {
+    return socket.send("\x02" + content, port, ip, (err) => {
         if (err)
             return console.error(`Failed to send a message to "${ip}:${port}":\n`, err);
     });
